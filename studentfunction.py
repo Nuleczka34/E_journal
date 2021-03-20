@@ -60,8 +60,8 @@ def add_student(gen_dict) -> dict:
     global index
     index += 1
 
-    student_name = input("Podaj imię(imiona): ").capitalize()
-    student_surname = input("Podaj nazwisko(nazwiska): ").capitalize()
+    student_name = input("Podaj imię(imiona): ")
+    student_surname = input("Podaj nazwisko(nazwiska): ")
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ")
     student_semester = input("Podaj obecny semestr: ")
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
