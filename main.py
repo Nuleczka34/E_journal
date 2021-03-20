@@ -1,5 +1,2 @@
 print("Zaczynamy :)")
-print("Konczymy")
-print("cos")
-print("")
-print()
+print("XD")
