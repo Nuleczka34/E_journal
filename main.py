@@ -1,13 +1,22 @@
-from studentfunction import add_student
+from studentfunction import *
 
-
-students_dict = {}
-flag = True
-index = 1
 
 # TODO: ZRÓB MENU GŁÓWNE
-while flag:
-    student_adding = add_student(students_dict, index)
-    if student_adding:
-        index += 1
-        print(students_dict)
+@json_decorator
+def main(gen_dict) -> dict and int:
+    flag = True
+    index = gen_dict.get("index", 1)
+    if "index" in gen_dict:
+        gen_dict.pop("index")
+    while flag:
+        student_adding = add_student(gen_dict, index)
+        if student_adding:
+            index += 1
+            gen_dict["index"] = index
+            break
+
+    return gen_dict
+
+
+if __name__ == '__main__':
+    main()

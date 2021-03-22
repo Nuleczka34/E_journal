@@ -1,6 +1,6 @@
 from datetime import datetime
 from math import ceil
-
+import json
 
 students_dict = {}
 
@@ -82,21 +82,22 @@ def semester_valid(sem: str, date_validate, when_birth: str) -> bool:
 
 
 def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
-
     name_validate = name_valid(name)
     surname_validate = surname_valid(surname)
     date_validate = date_valid(birthdate)
     semester_validate = semester_valid(semester, date_valid, birthdate)
 
     if name_validate and surname_validate and date_validate and semester_validate:
+
         return True
 
     else:
+
         return False
 
 
 def add_student(gen_dict: dict, student_index: int) -> bool:
-
+    # TODO: PORÓB REGEX DO IMIONA I NAZWISKA
     student_name = input("Podaj imię(imiona): ").strip()
     student_surname = input("Podaj nazwisko(nazwiska): ").strip()
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
@@ -114,3 +115,22 @@ def add_student(gen_dict: dict, student_index: int) -> bool:
         print("\nNie udało się stworzyć studenta!")
 
         return False
+
+
+def json_decorator(func):
+    def wrapper():
+        with open("students.json", encoding="UTF=8") as students_json:
+            read_json = students_json.read()
+
+            if read_json:
+                students_json.seek(0)
+                loaded_json = json.load(students_json)
+            else:
+                loaded_json = {}
+
+        final_dict = func(loaded_json)
+
+        with open("students.json", "w", encoding="UTF-8") as students_json:
+            json.dump(final_dict, students_json)
+
+    return wrapper
