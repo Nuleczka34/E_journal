@@ -1,6 +1,7 @@
+import json
+import re
 from datetime import datetime
 from math import ceil
-import json
 
 students_dict = {}
 
@@ -25,17 +26,17 @@ def date_valid(date: str) -> bool:
 
 
 def name_valid(first_name: str) -> bool:
-    if first_name.istitle() and 1 < len(first_name) <= 19:
+    if re.match(r"^[A-Ż][a-ż]{1,18}|[A-Ż][a-ż]{1,18}[ ][A-Ż][a-ż]{1,18}$", first_name):
         return True
 
     else:
         print("\nImię(Imiona) studenta jest/są nieprawidłowe!\n"
-              "Wzór:[Patryk / Patryk-Łukasz]")
+              "Wzór:[Patryk / Patryk Łukasz]")
         return False
 
 
-def surname_valid(student_surname: str) -> bool:
-    if student_surname.istitle() and 1 < len(student_surname) <= 30:
+def surname_valid(surname: str) -> bool:
+    if re.match(r"^[A-Ż][a-ż]{1,13}|[A-Ż][a-ż]{1,13}[ \-][A-Ż][a-ż]{1,13}$", surname):
         return True
 
     else:
@@ -97,7 +98,6 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
 
 
 def add_student(gen_dict: dict, student_index: int) -> bool:
-    # TODO: PORÓB REGEX DO IMIONA I NAZWISKA
     student_name = input("Podaj imię(imiona): ").strip()
     student_surname = input("Podaj nazwisko(nazwiska): ").strip()
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
