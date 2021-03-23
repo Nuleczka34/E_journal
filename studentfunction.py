@@ -2,6 +2,9 @@ import json
 import re
 from datetime import datetime
 from math import ceil
+from logging import debug, basicConfig, DEBUG
+
+basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
 def date_valid(date: str) -> bool:
@@ -95,7 +98,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def add_student() -> list or bool:
+def add_student(gen_dict, index) -> list or bool:
     student_name = input("Podaj imię(imiona): ").strip()
     student_surname = input("Podaj nazwisko(nazwiska): ").strip()
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
@@ -103,10 +106,11 @@ def add_student() -> list or bool:
 
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
+        gen_dict[index] = student_data_list
 
         print("\nUdało się stworzyć studenta!")
 
-        return student_data_list
+        return gen_dict
 
     else:
         print("\nNie udało się stworzyć studenta!")
@@ -123,9 +127,10 @@ def json_decorator(func):
                 try:
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
-                except ValueError:
-                    print("Błąd JSON, Napraw lub wyczyść plik")
-                    return
+                except ValueError as json_except:
+                    debug(json_except)
+                    return print("Błąd JSON, Napraw lub wyczyść plik")
+
             else:
                 loaded_json = {}
 
