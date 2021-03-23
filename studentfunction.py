@@ -3,8 +3,6 @@ import re
 from datetime import datetime
 from math import ceil
 
-students_dict = {}
-
 
 def date_valid(date: str) -> bool:
     try:
@@ -97,7 +95,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def add_student(gen_dict: dict, student_index: int) -> bool:
+def add_student() -> list or bool:
     student_name = input("Podaj imię(imiona): ").strip()
     student_surname = input("Podaj nazwisko(nazwiska): ").strip()
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
@@ -105,11 +103,10 @@ def add_student(gen_dict: dict, student_index: int) -> bool:
 
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
-        gen_dict[student_index] = student_data_list
 
         print("\nUdało się stworzyć studenta!")
 
-        return True
+        return student_data_list
 
     else:
         print("\nNie udało się stworzyć studenta!")
@@ -123,13 +120,18 @@ def json_decorator(func):
             read_json = students_json.read()
 
             if read_json:
-                students_json.seek(0)
-                loaded_json = json.load(students_json)
+                try:
+                    students_json.seek(0)
+                    loaded_json = json.load(students_json)
+                except ValueError:
+                    print("Błąd JSON, Napraw lub wyczyść plik")
+                    return
             else:
                 loaded_json = {}
 
         final_dict = func(loaded_json)
 
+        # TODO: ZAPYTAJ CZY DODAĆ OBSŁUGĘ WYJĄTKU
         with open("students.json", "w", encoding="UTF-8") as students_json:
             json.dump(final_dict, students_json)
 
