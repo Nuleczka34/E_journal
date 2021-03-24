@@ -2,7 +2,7 @@ import json
 import re
 from datetime import datetime
 from math import ceil
-from logging import debug, basicConfig, DEBUG
+from logging import basicConfig, DEBUG, exception
 
 basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -51,30 +51,36 @@ def semester_valid(sem: str, date_validate, when_birth: str) -> bool:
     if sem.isnumeric():
         sem = int(sem)
         check_age = date_validate(when_birth)
-        actual_student_year = ceil(sem / 2)
+        if check_age:
+            actual_student_year = ceil(sem / 2)
 
-        if actual_student_year == 1 and check_age >= 18:
-            return True
+            if actual_student_year == 1 and check_age >= 18:
+                return True
 
-        elif actual_student_year == 2 and check_age >= 19:
-            return True
+            elif actual_student_year == 2 and check_age >= 19:
+                return True
 
-        elif actual_student_year == 3 and check_age >= 20:
-            return True
+            elif actual_student_year == 3 and check_age >= 20:
+                return True
 
-        elif actual_student_year == 4 and check_age >= 21:
-            return True
+            elif actual_student_year == 4 and check_age >= 21:
+                return True
 
-        elif actual_student_year == 5 and check_age >= 22:
-            return True
+            elif actual_student_year == 5 and check_age >= 22:
+                return True
 
-        elif actual_student_year == 6 and check_age >= 23:
-            return True
+            elif actual_student_year == 6 and check_age >= 23:
+                return True
+
+            elif actual_student_year > 6:
+                print("\nLiczba semestru jest nieprawidłowa,wpisz liczbę z przedziału [1-12]")
+
+            else:
+                print("\nSprawdź czy wiek studenta pozwala na umieszczenie go na danym semestrze")
+
+                return False
 
         else:
-            print("\nLiczba semestru jest nieprawidłowa,wpisz liczbę z przedziału [1-12]\n"
-                  "Oraz sprawdź czy wiek studenta pozwala na umieszczenie go na danym semestrze")
-
             return False
 
     else:
@@ -128,7 +134,7 @@ def json_decorator(func):
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
                 except ValueError as json_except:
-                    debug(json_except)
+                    exception(str(json_except))
                     return print("Błąd JSON, Napraw lub wyczyść plik")
 
             else:
@@ -141,3 +147,7 @@ def json_decorator(func):
             json.dump(final_dict, students_json)
 
     return wrapper
+
+
+def display_student_dict():
+    pass

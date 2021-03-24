@@ -1,6 +1,5 @@
-from studentfunction import json_decorator, student_add
-from logging import debug, basicConfig, DEBUG
-
+from studentfunction import json_decorator, student_add, display_student_dict
+from logging import basicConfig, DEBUG, exception
 
 basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -26,7 +25,7 @@ def main(gen_dict: dict) -> dict:
             if 0 < int(chose_option) <= 7:
                 menu_dict = {'1': ("Wyświetlanie listy", display_student_dict),  # TODO: WYŚWIETLANIE LISTY
                              '2': ("Dodawanie studenta", student_add),
-                             '3': ("Usuwanie studenta", "student_delete"), # TODO: USUWANIE STUDENTA
+                             '3': ("Usuwanie studenta", "student_delete"),  # TODO: USUWANIE STUDENTA
                              '4': ("Edycja studenta", "student_edit"),  # TODO: EDYTUJ DANE STUDENTA
                              '5': ("Wyświetlanie ocen", "display_student_note"),  # TODO: WYŚWIETLANIE OCEN
                              '6': ("Dodawanie ocen", """student_note_add"""),  # TODO: DODAWANIE OCEN
@@ -38,9 +37,9 @@ def main(gen_dict: dict) -> dict:
                     print(f"\nWybrałeś '{menu_result}'\n")
                     menu_chosen_func(gen_dict, index=1)
 
-                except Exception as m_ex:
+                except Exception as func_except:
                     print("Wystąpił nieznany błąd")
-                    debug(m_ex)
+                    exception(str(func_except))
 
             elif int(chose_option) == 8:
                 flag = False
@@ -65,7 +64,6 @@ while index <= 3:
     add_student(gen_dict, index)
     index += 1
 '''
-
 
 if __name__ == '__main__':
     main()
