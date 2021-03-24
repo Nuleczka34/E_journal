@@ -11,8 +11,8 @@ def date_valid(date: str) -> bool:
     try:
         datetime_get = datetime.strptime(date, '%d.%m.%Y')
         actual_date = datetime.now()
-        age = actual_date.year - datetime_get.year - \
-            ((actual_date.month, actual_date.day) < (datetime_get.month, datetime_get.day))
+        age = actual_date.year - datetime_get.year - ((actual_date.month, actual_date.day) <
+                                                      (datetime_get.month, datetime_get.day))
 
         if 18 <= age:
             return age
@@ -46,7 +46,6 @@ def surname_valid(surname: str) -> bool:
         return False
 
 
-# TODO: POPRAW TEN MAKARON
 def semester_valid(sem: str, date_validate, when_birth: str) -> bool:
     if sem.isnumeric():
         sem = int(sem)
@@ -126,13 +125,15 @@ def student_add(gen_dict, index) -> list or bool:
 
 def json_decorator(func):
     def wrapper():
-        with open("students.json", encoding="UTF=8") as students_json:
+        with open("students.json", "a+", encoding="UTF=8") as students_json:
+            students_json.seek(0)
             read_json = students_json.read()
 
             if read_json:
                 try:
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
+
                 except ValueError as json_except:
                     exception(str(json_except))
                     return print("Błąd JSON, Napraw lub wyczyść plik")

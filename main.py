@@ -8,7 +8,8 @@ basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname
 @json_decorator
 def main(gen_dict: dict) -> dict:
     index = gen_dict.get("index", 1)
-    gen_dict.pop("index")
+    if "index" in gen_dict:
+        gen_dict.pop("index")
 
     flag = True
 
@@ -39,8 +40,9 @@ def main(gen_dict: dict) -> dict:
                 try:
                     print(f"\nWybrałeś '{menu_result}'\n")
                     if menu_result == "Dodawanie studenta":
-                        menu_chosen_func(gen_dict, index)
-                        index += 1
+                        adding_student = menu_chosen_func(gen_dict, index)
+                        if adding_student:
+                            index += 1
 
                 except Exception as func_except:
                     print("Wystąpił nieznany błąd")
@@ -56,20 +58,8 @@ def main(gen_dict: dict) -> dict:
             print("\nWybierz prawidłową operację!")
 
     gen_dict["index"] = index
-    # TODO: NA KOŃCU ZWRÓĆ SŁOWNIK DO JSON
     return gen_dict
 
-
-'''DODAWANIE STUDENTA
-index = gen_dict.get("index", 1)
-while index <= 3:
-    if index == 3:
-        gen_dict["index"] = index
-        print(gen_dict)
-        break
-    add_student(gen_dict, index)
-    index += 1
-'''
 
 if __name__ == '__main__':
     main()
