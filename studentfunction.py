@@ -98,7 +98,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def add_student(gen_dict, index) -> list or bool:
+def student_add(gen_dict, index) -> list or bool:
     student_name = input("Podaj imię(imiona): ").strip()
     student_surname = input("Podaj nazwisko(nazwiska): ").strip()
     student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
