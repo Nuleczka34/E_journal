@@ -1,4 +1,5 @@
-from studentfunction import json_decorator, student_add, display_student_dict
+from student_add_function import json_decorator, student_add
+from student_rest_functions import display_student_dict
 from logging import basicConfig, DEBUG, exception
 
 basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -40,7 +41,13 @@ def main(gen_dict: dict) -> dict:
                 try:
                     print(f"\nWybrałeś '{menu_result}'\n")
                     if menu_result == "Dodawanie studenta":
-                        adding_student = menu_chosen_func(gen_dict, index)
+                        student_name = input("Podaj imię(imiona): ").strip()
+                        student_surname = input("Podaj nazwisko(nazwiska): ").strip()
+                        student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
+                        student_semester = input("Podaj obecny semestr: ").strip()
+
+                        adding_student = menu_chosen_func(gen_dict, index, student_name, student_surname,
+                                                          student_birthdate, student_semester)
                         if adding_student:
                             index += 1
 

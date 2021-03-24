@@ -103,12 +103,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def student_add(gen_dict, index) -> list or bool:
-    student_name = input("Podaj imię(imiona): ").strip()
-    student_surname = input("Podaj nazwisko(nazwiska): ").strip()
-    student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
-    student_semester = input("Podaj obecny semestr: ").strip()
-
+def student_add(gen_dict, index, student_name, student_surname, student_birthdate, student_semester) -> list or bool:
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
         gen_dict[index] = student_data_list
@@ -151,7 +146,3 @@ def json_decorator(func):
                 exception(save_json_except)
 
     return wrapper
-
-
-def display_student_dict():
-    pass
