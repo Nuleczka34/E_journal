@@ -7,6 +7,9 @@ basicConfig(filename="logging.log", level=DEBUG, format='%(asctime)s:%(levelname
 # TODO: ZRÓB MENU GŁÓWNE
 @json_decorator
 def main(gen_dict: dict) -> dict:
+    index = gen_dict.get("index", 1)
+    gen_dict.pop("index")
+
     flag = True
 
     while flag:
@@ -35,7 +38,9 @@ def main(gen_dict: dict) -> dict:
 
                 try:
                     print(f"\nWybrałeś '{menu_result}'\n")
-                    menu_chosen_func(gen_dict, index=1)
+                    if menu_result == "Dodawanie studenta":
+                        menu_chosen_func(gen_dict, index)
+                        index += 1
 
                 except Exception as func_except:
                     print("Wystąpił nieznany błąd")
@@ -50,6 +55,7 @@ def main(gen_dict: dict) -> dict:
         except ValueError:
             print("\nWybierz prawidłową operację!")
 
+    gen_dict["index"] = index
     # TODO: NA KOŃCU ZWRÓĆ SŁOWNIK DO JSON
     return gen_dict
 

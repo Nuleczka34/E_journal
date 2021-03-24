@@ -142,9 +142,12 @@ def json_decorator(func):
 
         final_dict = func(loaded_json)
 
-        # TODO: ZAPYTAJ CZY DODAĆ OBSŁUGĘ WYJĄTKU
         with open("students.json", "w", encoding="UTF-8") as students_json:
-            json.dump(final_dict, students_json)
+            try:
+                json.dump(final_dict, students_json)
+            except Exception as save_json_except:
+                print("Nie udało zapisać się studentów!")
+                exception(save_json_except)
 
     return wrapper
 
