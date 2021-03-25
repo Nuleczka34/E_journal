@@ -40,6 +40,7 @@ def main(students_dict: dict) -> dict:
 
                 try:
                     print(f"\nWybrałeś '{menu_result}'\n")
+
                     if menu_result == "Wyświetlanie listy":
                         display_student_dict(students_dict)
 
@@ -53,11 +54,24 @@ def main(students_dict: dict) -> dict:
                                                           student_birthdate, student_semester)
                         if adding_student:
                             index += 1
+
+                    elif menu_result == "Usuwanie studenta":
+                        menu_chosen_func()  # TODO: ARGUMENTY
+
                     elif menu_result == "Edycja studenta":
                         pick_student_number = input("Podaj numer studenta, którego chcesz edytować: ")
                         print(students_dict[pick_student_number])
-                        data_for_edit = input("Wybierz którą daną chcesz edytować: ") # TODO: DOKOŃCZ DEF I TUTAJ
+                        data_for_edit = input("Wybierz którą daną chcesz edytować: ")  # TODO: DOKOŃCZ DEF I TUTAJ
                         menu_chosen_func(students_dict, pick_student_number)
+
+                    elif menu_result == "Wyświetlanie ocen":
+                        menu_chosen_func()  # TODO: ARGUMENTY
+
+                    elif menu_result == "Dodawanie ocen":
+                        menu_chosen_func()  # TODO: ARGUMENTY
+
+                    elif menu_result == "Edycja ocen":
+                        menu_chosen_func()  # TODO: ARGUMENTY
 
                 except Exception as func_except:
                     print("Wystąpił nieznany błąd")
