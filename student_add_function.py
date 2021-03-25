@@ -46,45 +46,26 @@ def surname_valid(surname: str) -> bool:
         return False
 
 
-def semester_valid(sem: str, date_validate, when_birth: str) -> bool:
-    if sem.isnumeric():
+def semester_valid(sem: str, date_validate) -> bool:
+    student_age = date_validate
+
+    years_list = [year for year in range(18, 101)]
+
+    year_check = {1: years_list[0:], 2: years_list[1:], 3: years_list[2:],
+                  4: years_list[3:], 5: years_list[4:], 6: years_list[5:]}
+
+    if sem.isnumeric() and student_age:
         sem = int(sem)
-        check_age = date_validate(when_birth)
-        if check_age:
-            actual_student_year = ceil(sem / 2)
+        actual_student_year = ceil(sem / 2)
 
-            if actual_student_year == 1 and check_age >= 18:
-                return True
-
-            elif actual_student_year == 2 and check_age >= 19:
-                return True
-
-            elif actual_student_year == 3 and check_age >= 20:
-                return True
-
-            elif actual_student_year == 4 and check_age >= 21:
-                return True
-
-            elif actual_student_year == 5 and check_age >= 22:
-                return True
-
-            elif actual_student_year == 6 and check_age >= 23:
-                return True
-
-            elif actual_student_year > 6:
-                print("\nLiczba semestru jest nieprawidłowa,wpisz liczbę z przedziału [1-12]")
-
-            else:
-                print("\nSprawdź czy wiek studenta pozwala na umieszczenie go na danym semestrze")
-
-                return False
+        if student_age in year_check[actual_student_year]:
+            return True
 
         else:
+            print("\nWiek ucznia, nie pozwala na przypisanie go to tego semestru!")
             return False
 
     else:
-        print("\nMusisz wpisać numer semestru!")
-
         return False
 
 
@@ -92,7 +73,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
     name_validate = name_valid(name)
     surname_validate = surname_valid(surname)
     date_validate = date_valid(birthdate)
-    semester_validate = semester_valid(semester, date_valid, birthdate)
+    semester_validate = semester_valid(semester, date_validate)
 
     if name_validate and surname_validate and date_validate and semester_validate:
 
