@@ -19,16 +19,17 @@ def date_valid(date: str) -> bool:
 
         else:
             print("\nStudent musi posiadać 18 lat!")
+
             return False
 
     except ValueError:
         print("\nWpisana data jest niepoprawna!\nWzór:[dd-mm-yyyy]")
+
         return False
 
 
 def name_valid(first_name: str) -> bool:
     if findall(r"^[A-Ż][a-ż]{1,18}$|^[A-Ż][a-ż]{1,18}[ ][A-Ż][a-ż]{1,18}$", first_name):
-
         return True
 
     else:
@@ -40,7 +41,6 @@ def name_valid(first_name: str) -> bool:
 
 def surname_valid(surname: str) -> bool:
     if findall(r"^[A-Ż][a-ż]{1,13}$|^[A-Ż][a-ż]{1,13}[ \-][A-Ż][a-ż]{1,13}$", surname):
-
         return True
 
     else:
@@ -80,11 +80,9 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
     semester_validate = semester_valid(semester, date_validate)
 
     if name_validate and surname_validate and date_validate and semester_validate:
-
         return True
 
     else:
-
         return False
 
 
