@@ -45,10 +45,10 @@ def main(students_dict: dict) -> dict:
                         display_student_dict(students_dict)
 
                     elif menu_result == "Dodawanie studenta":
-                        student_name = input("Podaj imię(imiona): ").strip()
-                        student_surname = input("Podaj nazwisko(nazwiska): ").strip()
-                        student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ").strip()
-                        student_semester = input("Podaj obecny semestr: ").strip()
+                        student_name = input("Podaj imię(imiona) [Imię/ Imię Imię]: ")
+                        student_surname = input("Podaj nazwisko(nazwiska) [Nazwisko/ Nazwisko-Nazwisko]: ")
+                        student_birthdate = input("Podaj datę urodzenia[dd.mm.yyyy]: ")
+                        student_semester = input("Podaj obecny semestr [1 - 12]: ")
 
                         adding_student = menu_chosen_func(students_dict, index, student_name, student_surname,
                                                           student_birthdate, student_semester)
