@@ -1,5 +1,5 @@
 import json
-import re
+from re import findall
 from datetime import datetime
 from math import ceil
 from logging import basicConfig, DEBUG, exception
@@ -27,7 +27,7 @@ def date_valid(date: str) -> bool:
 
 
 def name_valid(first_name: str) -> bool:
-    if re.match(r"^[A-Ż][a-ż]{1,18}|[A-Ż][a-ż]{1,18}[ ][A-Ż][a-ż]{1,18}$", first_name):
+    if findall(r"^[A-Ż][a-ż]{1,10}|[A-Ż][a-ż]{1,18}[ ][A-Ż][a-ż]{1,18}$", first_name):
         return True
 
     else:
@@ -37,7 +37,7 @@ def name_valid(first_name: str) -> bool:
 
 
 def surname_valid(surname: str) -> bool:
-    if re.match(r"^[A-Ż][a-ż]{1,13}|[A-Ż][a-ż]{1,13}[ \-][A-Ż][a-ż]{1,13}$", surname):
+    if findall(r"^[A-Ż][a-ż]{1,13}|[A-Ż][a-ż]{1,13}[ \-][A-Ż][a-ż]{1,13}$", surname):
         return True
 
     else:
