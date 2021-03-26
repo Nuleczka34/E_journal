@@ -56,22 +56,33 @@ def main(students_dict: dict) -> dict:
                             index += 1
 
                     elif menu_result == "Usuwanie studenta":
-                        menu_chosen_func()  # TODO: ARGUMENTY
+                        pass
+                        #menu_chosen_func()
 
                     elif menu_result == "Edycja studenta":
+                        # TODO: DODAJ OPCJONALNĄ WYSZUKIWARKĘ
                         pick_student_number = input("Podaj numer studenta, którego chcesz edytować: ")
-                        print(students_dict[pick_student_number])
-                        data_for_edit = input("Wybierz którą daną chcesz edytować: ")  # TODO: DOKOŃCZ DEF I TUTAJ
-                        menu_chosen_func(students_dict, pick_student_number)
+                        check_student = students_dict.get(pick_student_number, False)
+
+                        if check_student:
+                            display_student_dict(students_dict, chosen_student_number=pick_student_number)
+                            data_for_edit = input("Wybierz którą daną chcesz edytować: ")
+
+                            new_data = input("Wpisz nową wartość: ")
+
+                            menu_chosen_func(students_dict, data_for_edit, new_data, pick_student_number)
+
+                        else:
+                            print("Student o podanym numerze nie znajduje się na liście!")
 
                     elif menu_result == "Wyświetlanie ocen":
-                        menu_chosen_func()  # TODO: ARGUMENTY
+                        menu_chosen_func()
 
                     elif menu_result == "Dodawanie ocen":
-                        menu_chosen_func()  # TODO: ARGUMENTY
+                        menu_chosen_func()
 
                     elif menu_result == "Edycja ocen":
-                        menu_chosen_func()  # TODO: ARGUMENTY
+                        menu_chosen_func()
 
                 except Exception as func_except:
                     print("Wystąpił nieznany błąd")

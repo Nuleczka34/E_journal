@@ -28,6 +28,7 @@ def date_valid(date: str) -> bool:
         return False
 
 
+# TODO: DODAJ ABY IMIONA NIE MOGŁY BYĆ IDENTYCZNE
 def name_valid(first_name: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18} "
              r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name):
@@ -40,6 +41,7 @@ def name_valid(first_name: str) -> bool:
         return False
 
 
+# TODO: DODAJ ABY NAZWISKA NIE MOGŁY BYĆ IDENTYCZNE
 def surname_valid(surname: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}[ \-][A-ZŻŹĆĄŚĘŁÓŃ]["
              r"a-zżźćńółęąś]{1,13}$", surname):
@@ -77,6 +79,7 @@ def semester_valid(sem: str, date_validate) -> bool:
         return False
 
 
+# TODO: DODAJ ABY IMIĘ I NAZWISKO NIE MOGŁO BYC TAKIE SAME
 def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
     name_validate = name_valid(name)
     surname_validate = surname_valid(surname)
@@ -90,7 +93,9 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def student_add(gen_dict, index, student_name, student_surname, student_birthdate, student_semester) -> list or bool:
+def student_add(gen_dict: dict, index: int, student_name: str, student_surname: str,
+                student_birthdate: str, student_semester: str) -> list or bool:
+
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
         gen_dict[index] = student_data_list
