@@ -94,7 +94,7 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
 
 
 def student_add(gen_dict: dict, index: int, student_name: str, student_surname: str,
-                student_birthdate: str, student_semester: str) -> list or bool:
+                student_birthdate: str, student_semester: str) -> bool:
 
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
@@ -102,7 +102,7 @@ def student_add(gen_dict: dict, index: int, student_name: str, student_surname: 
 
         print("\nUdało się stworzyć studenta!")
 
-        return gen_dict
+        return True
 
     else:
         print("\nNie udało się stworzyć studenta!")

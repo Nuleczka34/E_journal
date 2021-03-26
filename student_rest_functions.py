@@ -12,36 +12,27 @@ def display_student_dict(gen_dict: dict, chosen_student_number=False) -> None:
                   f"Data Urodzenia: {gen_dict[student_number][2]}, Numer semestru: {gen_dict[student_number][3]}")
 
 
-def student_edit(gen_dict: dict, chosen_data_for_change: str, new_data: str, student_number: str) -> dict or bool:
-    if student_number in gen_dict:
-        for student_data_list in gen_dict.values():
-            if chosen_data_for_change in student_data_list:
-                data_index = student_data_list.index(chosen_data_for_change)
-                valid_func_dict = {0: name_valid, 1: surname_valid, 2: date_valid, 3: semester_valid}
+def student_edit(gen_dict: dict, chosen_data_for_change: str, new_data: str, student_number: str) -> bool:
+    if chosen_data_for_change in gen_dict[student_number]:
 
-                for func_number in valid_func_dict:
-                    if func_number <= 2 and func_number == data_index:
-                        new_data_validate = valid_func_dict[func_number](new_data)
-                        if new_data_validate:
-                            gen_dict[student_number][data_index] = new_data
+        data_index = gen_dict[student_number].index(chosen_data_for_change)
 
-                    elif func_number == 3 and func_number == data_index:
-                        date_validate = date_valid(student_data_list[2])
+        valid_func_dict = {0: name_valid, 1: surname_valid, 2: date_valid, 3: semester_valid}
 
-                        new_data_validate = valid_func_dict[func_number](new_data, date_validate)
+        if data_index in valid_func_dict:
+            if data_index <= 2:
+                new_data_validate = valid_func_dict[data_index](new_data)
+                if new_data_validate:
+                    gen_dict[student_number][data_index] = new_data
+                    return True
 
-                        if new_data_validate:
-                            gen_dict[student_number][data_index] = new_data
-
-                            return gen_dict
-
-                        else:
-                            return False
+            elif data_index == 3:
+                date_validate = date_valid(gen_dict[student_number][2])
+                new_data_validate = valid_func_dict[data_index](new_data, date_validate)
+                if new_data_validate:
+                    gen_dict[student_number][data_index] = new_data
+                    return True
 
     else:
         print("\nPodana wartość nie znajduję się w danych studenta!")
         return False
-
-
-
-
