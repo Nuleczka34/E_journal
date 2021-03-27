@@ -66,10 +66,8 @@ def main(students_dict: dict) -> dict:
 
                         if check_student:
                             display_student_dict(students_dict, chosen_student_number=pick_student_number)
-                            # TODO: DODAJ WYBIERANIE PO OPCJI NP. IMIĘ A NIE WARTOŚCI CZYLI TOMEK
-                            #  I WYŚWIETLAJ IMIĘ PRZED ZMIANA I PO ZMIANIE
 
-                            data_for_edit = input("Wybierz którą daną chcesz edytować: ")
+                            data_for_edit = input("Wybierz którą daną chcesz edytować[Np. Imię]: ")
 
                             new_data = input("Wpisz nową wartość: ")
 

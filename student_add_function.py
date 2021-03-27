@@ -31,7 +31,7 @@ def date_valid(date: str) -> bool:
 # TODO: DODAJ ABY IMIONA NIE MOGŁY BYĆ IDENTYCZNE
 def name_valid(first_name: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18} "
-             r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name):
+             r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name) and first_name:
         return True
 
     else:
@@ -79,7 +79,6 @@ def semester_valid(sem: str, date_validate) -> bool:
         return False
 
 
-# TODO: DODAJ ABY IMIĘ I NAZWISKO NIE MOGŁO BYC TAKIE SAME
 def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
     name_validate = name_valid(name)
     surname_validate = surname_valid(surname)
