@@ -14,11 +14,11 @@ def date_valid(date: str) -> bool:
         age = actual_date.year - datetime_get.year - ((actual_date.month, actual_date.day) <
                                                       (datetime_get.month, datetime_get.day))
 
-        if 18 <= age:
+        if 18 <= age <= 100:
             return age
 
         else:
-            print("\nStudent musi posiadać 18 lat!")
+            print("\nWiek studenta musi mieścić się w zakresie 18-100 lat!")
 
             return False
 
