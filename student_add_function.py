@@ -14,11 +14,11 @@ def date_valid(date: str) -> bool:
         age = actual_date.year - datetime_get.year - ((actual_date.month, actual_date.day) <
                                                       (datetime_get.month, datetime_get.day))
 
-        if 18 <= age:
+        if 18 <= age <= 100:
             return age
 
         else:
-            print("\nStudent musi posiadać 18 lat!")
+            print("\nWiek studenta musi mieścić się w zakresie 18-100 lat!")
 
             return False
 
@@ -29,7 +29,8 @@ def date_valid(date: str) -> bool:
 
 
 def name_valid(first_name: str) -> bool:
-    if match(r"^[A-ZĄ-Ż][a-zą-ż]{1,18}$|^[A-ZĄ-Ż][a-zą-ż]{1,18}[ ][A-ZĄ-Ż][a-zą-ż]{1,18}$", first_name):
+    if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18} "
+             r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name) and first_name:
         return True
 
     else:
@@ -40,7 +41,8 @@ def name_valid(first_name: str) -> bool:
 
 
 def surname_valid(surname: str) -> bool:
-    if match(r"^[A-ZĄ-Ż][a-zą-ż]{1,13}$|^[A-ZĄ-Ż][a-zą-ż]{1,13}[ \-][A-ZĄ-Ż][a-zą-ż]{1,13}$", surname):
+    if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}[ ][A-ZŻŹĆĄŚĘŁÓŃ]["
+             r"a-zżźćńółęąś]{1,13}$", surname):
         return True
 
     else:
@@ -70,6 +72,8 @@ def semester_valid(sem: str, date_validate) -> bool:
             return False
 
     else:
+        print("\nWpisany numer semestru jest nieprawidłowy!\n"
+              "Wpisz liczbę z przedziału [1 - 12]")
         return False
 
 
@@ -86,14 +90,16 @@ def data_valid(name: str, surname: str, birthdate: str, semester: str) -> bool:
         return False
 
 
-def student_add(gen_dict, index, student_name, student_surname, student_birthdate, student_semester) -> list or bool:
+def student_add(gen_dict: dict, index: int, student_name: str, student_surname: str,
+                student_birthdate: str, student_semester: str) -> bool:
+
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
         gen_dict[index] = student_data_list
 
         print("\nUdało się stworzyć studenta!")
 
-        return gen_dict
+        return True
 
     else:
         print("\nNie udało się stworzyć studenta!")
@@ -112,7 +118,7 @@ def json_decorator(func):
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
 
-                except ValueError as json_except:
+                except Exception as json_except:
                     exception(str(json_except))
                     return print("Błąd JSON, Napraw lub wyczyść plik")
 
@@ -124,6 +130,7 @@ def json_decorator(func):
         with open("students.json", "w", encoding="UTF-8") as students_json:
             try:
                 json.dump(final_dict, students_json)
+
             except Exception as save_json_except:
                 print("Nie udało zapisać się studentów!")
                 exception(save_json_except)
