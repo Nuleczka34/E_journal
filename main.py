@@ -59,8 +59,9 @@ def main(students_dict: dict) -> dict:
                         # menu_chosen_func()
 
                     elif menu_result == "Edycja studenta":
-                        pick_student_name = input("Wpisz imię/ imiona studenta którego szukasz: ")
-                        pick_student_surname = input("Wpisz nazwisko/ nazwiska studenta którego szukasz: ")
+                        pick_student_name = input("Wpisz imię/ imiona studenta którego szukasz[WZÓR: Imię Imię]: ")
+                        pick_student_surname = input("Wpisz nazwisko/ nazwiska studenta którego szukasz"
+                                                     "[WZÓR: Nazwisko Nazwisko]: ")
 
                         pick_student_number = student_search_engine(students_dict,
                                                                     pick_student_name, pick_student_surname)
