@@ -28,7 +28,6 @@ def date_valid(date: str) -> bool:
         return False
 
 
-# TODO: DODAJ ABY IMIONA NIE MOGŁY BYĆ IDENTYCZNE
 def name_valid(first_name: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18} "
              r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name) and first_name:
@@ -41,9 +40,8 @@ def name_valid(first_name: str) -> bool:
         return False
 
 
-# TODO: DODAJ ABY NAZWISKA NIE MOGŁY BYĆ IDENTYCZNE
 def surname_valid(surname: str) -> bool:
-    if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}[ \-][A-ZŻŹĆĄŚĘŁÓŃ]["
+    if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}[ ][A-ZŻŹĆĄŚĘŁÓŃ]["
              r"a-zżźćńółęąś]{1,13}$", surname):
         return True
 
@@ -120,7 +118,7 @@ def json_decorator(func):
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
 
-                except ValueError as json_except:
+                except Exception as json_except:
                     exception(str(json_except))
                     return print("Błąd JSON, Napraw lub wyczyść plik")
 
@@ -132,6 +130,7 @@ def json_decorator(func):
         with open("students.json", "w", encoding="UTF-8") as students_json:
             try:
                 json.dump(final_dict, students_json)
+
             except Exception as save_json_except:
                 print("Nie udało zapisać się studentów!")
                 exception(save_json_except)
