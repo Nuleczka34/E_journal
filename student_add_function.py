@@ -30,7 +30,8 @@ def date_valid(date: str) -> bool:
 
 def name_valid(first_name: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18} "
-             r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name) and first_name:
+             r"[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,18}$", first_name):
+
         return True
 
     else:
@@ -43,6 +44,7 @@ def name_valid(first_name: str) -> bool:
 def surname_valid(surname: str) -> bool:
     if match(r"^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}$|^[A-ZŻŹĆĄŚĘŁÓŃ][a-zżźćńółęąś]{1,13}[ ][A-ZŻŹĆĄŚĘŁÓŃ]["
              r"a-zżźćńółęąś]{1,13}$", surname):
+
         return True
 
     else:
@@ -94,6 +96,7 @@ def student_add(gen_dict: dict, index: int, student_name: str, student_surname: 
                 student_birthdate: str, student_semester: str) -> bool:
 
     if data_valid(student_name, student_surname, student_birthdate, student_semester):
+
         student_data_list = [student_name, student_surname, student_birthdate, student_semester]
         gen_dict[index] = student_data_list
 
@@ -118,8 +121,8 @@ def json_decorator(func):
                     students_json.seek(0)
                     loaded_json = json.load(students_json)
 
-                except Exception as json_except:
-                    exception(str(json_except))
+                except Exception as json_exception:
+                    exception(str(json_exception))
                     return print("Błąd JSON, Napraw lub wyczyść plik")
 
             else:
@@ -131,8 +134,8 @@ def json_decorator(func):
             try:
                 json.dump(final_dict, students_json)
 
-            except Exception as save_json_except:
+            except Exception as json_exception:
                 print("Nie udało zapisać się studentów!")
-                exception(save_json_except)
+                exception(json_exception)
 
     return wrapper

@@ -24,9 +24,9 @@ def main(students_dict: dict) -> dict:
 8. Zakończ program
               ''')
 
-        chose_option = input("Wybierz numer operacji z listy: ").strip()
+        chosen_option = input("Wybierz numer operacji z listy: ").strip()
         try:
-            if 0 < int(chose_option) <= 7:
+            if int(chosen_option) in range(1, 8):
                 menu_dict = {'1': ("Wyświetlanie listy", display_student_dict),
                              '2': ("Dodawanie studenta", student_add),
                              '3': ("Usuwanie studenta", "student_delete"),  # TODO: USUWANIE STUDENTA
@@ -35,7 +35,7 @@ def main(students_dict: dict) -> dict:
                              '6': ("Dodawanie ocen", """student_note_add"""),  # TODO: DODAWANIE OCEN
                              '7': ("Edycja ocen", "student_note_edit")}  # TODO: EDYCJA OCEN
 
-                menu_result, menu_chosen_func = menu_dict.get(chose_option)
+                menu_result, menu_chosen_func = menu_dict.get(chosen_option)
 
                 try:
                     print(f"\nWybrałeś '{menu_result}'\n")
@@ -88,7 +88,7 @@ def main(students_dict: dict) -> dict:
                     print("Wystąpił nieznany błąd")
                     exception(str(func_except))
 
-            elif int(chose_option) == 8:
+            elif int(chosen_option) == 8:
                 flag = False
 
             else:
